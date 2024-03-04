@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# Configuring Nginx to connect on post 80
+rm /etc/nginx/sites-available/default
+ln -a /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+sudo service nginx restart
