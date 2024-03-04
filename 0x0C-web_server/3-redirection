@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+# redirects to another page
+
+sudo apt-get update
+sudo apt-get install nginx -y
+ufw allow 'Nginx HTTP'
+
+sudo chown -R "$USER":"$USER" /var/www
+sudo chown -R "$USER":"$USER" /etc/nginx/sites-available/default
+
+touch /var/www/html/index.nginx-debian.html
+echo 'Hello World!' > /var/www/html/index.nginx-debian.html
+
+echo "server {
+     listen      80 default_server;
+     listen      [::]:80 default_server;
+     root        /var/www/html;
+     index       index.html index.htm;
+     location /redirect_me {
+        return 301 https://github.com/KgomotsoNthuping;
+    }
+}" > /etc/nginx/sites-available/default
+
+sudo service nginx restart
